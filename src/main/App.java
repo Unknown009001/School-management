@@ -5,79 +5,78 @@ import java.util.Scanner;
 import src.menu.*;
 import src.service.*;
 
-
 public class App {
 
     public static void main(String[] args){
 
-        GestionEstudiantes gestorEs = new GestionEstudiantes();
-        GestionProfesores gestorPr = new GestionProfesores();
+        StudentManagement studentManager = new StudentManagement();
+        TeacherManagement teacherManager = new TeacherManagement();
         Scanner scanner = new Scanner(System.in);
-        MenuInicio menuInicio = new MenuInicio();
+        MainMenu mainMenu = new MainMenu();
 
-        int opcionInicio;
+        int startOption;
         do {
-            opcionInicio = menuInicio.menuInicioInvoc(scanner);
-            switch (opcionInicio) {
+            startOption = mainMenu.invokeMainMenu(scanner);
+            switch (startOption) {
                 case 1:
-                    MenuEstu menuEstu = new MenuEstu();
-                    int opcionEs;
+                    StudentMenu studentMenu = new StudentMenu();
+                    int studentOption;
                     do {
-                        opcionEs = menuEstu.menuEstuInvoc(scanner);
-                        switch (opcionEs) {
+                        studentOption = studentMenu.invokeStudentMenu(scanner);
+                        switch (studentOption) {
                             case 1:
-                                gestorEs.añadirEstudiantes(scanner);
+                                studentManager.addStudents(scanner);
                                 break;
                             case 2: 
-                                gestorEs.eliminarEstudiantes(scanner);
+                                studentManager.removeStudents(scanner);
                                 break;
                             case 3: 
-                                gestorEs.actualizarEstudiante(scanner);
+                                studentManager.updateStudent(scanner);
                                 break;
                             case 4: 
-                                gestorEs.mostrarDetallesEstudiante(scanner);
+                                studentManager.showStudentDetails(scanner);
                                 break;
                             case 5:
-                                gestorEs.ponerCalificacion(scanner);
+                                studentManager.assignGrade(scanner);
                                 break;
                             default:
                                 System.out.println("---------------------------------");
                                 break;
                         }
-                    } while (opcionEs != 6);
+                    } while (studentOption != 6);
                     break;
                 case 2:
-                    MenuProf menuProf = new MenuProf();
-                    int opcionProf;
+                    TeacherMenu teacherMenu = new TeacherMenu();
+                    int teacherOption;
                     do {
-                        opcionProf = menuProf.menuProfInvoc(scanner);
-                        switch (opcionProf) {
+                        teacherOption = teacherMenu.invokeTeacherMenu(scanner);
+                        switch (teacherOption) {
                             case 1:
-                                gestorPr.añadirProfesores(scanner);
+                                teacherManager.addTeachers(scanner);
                                 break;
                             case 2: 
-                                gestorPr.eliminarProfesores(scanner);
+                                teacherManager.removeTeachers(scanner);
                                 break;
                             case 3: 
-                                gestorPr.actualizarProfesor(scanner);
+                                teacherManager.updateTeacher(scanner);
                                 break;
                             case 4: 
-                                gestorPr.mostrarDetallesProfesor(scanner);
+                                teacherManager.showTeacherDetails(scanner);
                                 break;
                             default:
                                 System.out.println("---------------------------------");
                                 break;
                         }
-                    } while (opcionProf != 5);
+                    } while (teacherOption != 5);
                     break;
                 case 3:
-                    System.out.println("Saliendo del sistema...");
+                    System.out.println("Exiting the system...");
                     break;
                 default:
                     System.out.println("---------------------------------------");
                     break;
             }
-        } while (opcionInicio != 3);
+        } while (startOption != 3);
 
         scanner.close();
     }
